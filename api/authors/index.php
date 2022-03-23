@@ -19,9 +19,24 @@
 		}
 	}
 
-	if($method === 'POST')
+	else if($method === 'POST')
 	{
-		require 'create';
+		require 'create.php';
+	}
+
+	else if($method === 'PUT')
+	{
+		require 'update.php';
+	}
+
+	else if($method === 'DELETE')
+	{
+		require 'delete.php';
+	}
+
+	else
+	{
+		echo json_encode(array('message' => 'Cannot use this method'));
 	}
 
 

@@ -6,27 +6,27 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Category.php';
+  include_once '../../models/Author.php';
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $category = new Category($db);
+  $author = new Author($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to UPDATE
-  $category->id = $data->id;
+  $author->id = $data->id;
 
   // Delete post
-  if($category->delete()) {
+  if($author->delete()) {
     echo json_encode(
-      array('message' => 'Category deleted')
+      array('message' => 'Author deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Category not deleted')
+      array('message' => 'Author not deleted')
     );
   }

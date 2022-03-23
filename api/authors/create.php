@@ -16,7 +16,7 @@
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
-  echo 'here';
+
   $author->name = $data->author;
 
   // Create Author

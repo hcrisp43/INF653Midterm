@@ -15,7 +15,7 @@
   $author = new Author($db);
 
   // Get raw posted data
-  $data = json_decode(file_get_contents("php://input"));
+  $data = isset($_GET['id']) ? $_GET['id'] : die();
 
   // Set ID to UPDATE
   $author->id = $data->id;

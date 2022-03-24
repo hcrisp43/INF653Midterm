@@ -15,7 +15,7 @@
   $author = new Author($db);
 
   // Get raw posted data
-  $data = json_decode(file_get_contents("php://input"));
+  $data = isset($_GET['author']) ? $_GET['author'] : die();
 
   $author->name = $data->author;
 

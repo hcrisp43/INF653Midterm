@@ -2,32 +2,30 @@
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: PUT');
+  header('Access-Control-Allow-Methods: POST');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Author.php';
+  include_once '../../models/Category.php';
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $author = new Author($db);
+  $category = new Category($db);
 
   // Get raw posted data
+  $data = isset($_GET['category']) ? $_GET['category'] : die();
 
-  // Set ID to UPDATE
-  $author->id = isset($_GET['id']) ? $_GET['id'] : die();
+  $category->name = $data->category;
 
-  $author->name = isset($_GET['author']) ? $_GET['author'] : die();
-
-  // Update post
-  if($category->update()) {
+  // Create Author
+  if($category->create()) {
     echo json_encode(
-      array('message' => 'Author Updated')
+      array('message' => 'Author Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Author not updated')
+      array('message' => 'Author Not Created')
     );
   }

@@ -2,32 +2,31 @@
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: PUT');
+  header('Access-Control-Allow-Methods: DELETE');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Author.php';
+  include_once '../../models/Quote.php';
   // Instantiate DB & connect
-  $database = new Database();
-  $db = $database->connect();
+  $Quote = new Database();
+  $db = $Quote->connect();
 
   // Instantiate blog post object
-  $author = new Author($db);
+  $quote = new Quote($db);
 
   // Get raw posted data
+  $data = isset($_GET['id']) ? $_GET['id'] : die();
 
   // Set ID to UPDATE
-  $author->id = isset($_GET['id']) ? $_GET['id'] : die();
+  $quote->id = $data->id;
 
-  $author->name = isset($_GET['author']) ? $_GET['author'] : die();
-
-  // Update post
-  if($category->update()) {
+  // Delete post
+  if($quote->delete()) {
     echo json_encode(
-      array('message' => 'Author Updated')
+      array('message' => 'Quote deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Author not updated')
+      array('message' => 'Quote not deleted')
     );
   }

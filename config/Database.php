@@ -12,6 +12,7 @@
       $this->conn = null;
 
       $url = getenv('JAWSDB_URL');
+      echo $url;
       $dbparts = parse_url($url);
 
       $this->host = $dbparts['host'];

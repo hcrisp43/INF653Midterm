@@ -8,6 +8,7 @@
     header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
 	}
 
+	echo $_SERVER['REQUEST_METHOD'];
 	if($method === 'GET')
 	{
 		if(empty($_SERVER['QUERY_STRING'])){
